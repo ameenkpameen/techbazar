@@ -1,0 +1,185 @@
+<%- include('../layout/admin/admin_header.ejs') %>
+<%- include('../layout/admin/admin_nav.ejs') %>
+<%- include('../layout/admin/admin_sidebar.ejs') %>
+
+
+<main id="main" class="main">
+  <section class="section">
+
+    
+
+    <section class="section dashboard">
+      <div class="row">
+        
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto" style="background-color: rgb(255, 255, 255);">
+                <div class="text-center mt-4">
+                  <h1 class="fw-bold text-danger">Orders List</h1>
+                </div><!-- End Page Title -->
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Orders List<span>| Today</span></h5>
+  
+                  <table class="table table-borderless datatable table-striped table-bordered bg-color-dark" >
+                    <thead>
+                      <tr>
+                        
+                        <th scope="col">Sl.No.</th>
+                        <th scope="col">OrderId</th>
+                        <th scope="col">Username</th>
+                        
+                        <th scope="col" class="px-5">Products</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Order Total</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Payment Method</th>
+                        
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        
+                        <%
+                          
+                          if(orders.length > 0){
+                            for(let i=0; i<orders.length; i++){
+                                %>
+                                 <tr>
+
+                                  <td> <%=i+1%></td>
+
+                                  <td><%= orders[i].orderId %></td>
+
+                                  <td class="px-5 pb-3"><%= users[i].userId.name %></td>
+
+                                  
+
+                                  <td>
+                                  <% products[i].products.forEach((element)=>{ %>
+                                  <%= element.productId.productname %> <br> <br>
+                                  <% }) %>
+                                </td>
+                                  
+                               <td><% products[i].products.forEach((element)=>{ %>
+                                   <%= element.quantity %> <br> <br> <br>
+                                   <% }) %></td>
+
+                                  <td><% products[i].products.forEach((element)=>{ %>
+                                  <%= element.producttotal %> <br> <br> <br>
+                                  <% }) %></td>
+                                  <td><%= orders[i].discount %></td>
+                                  <td><%= orders[i].totalprice %></td>
+                                  <td><div class="btn-group">
+                                    <span id="boot-icon" class="bi bi-three-dots-vertical dropdown-toggle" style="font-size: 15px; color: rgb(255, 0, 0); -webkit-text-stroke-width: 0.9px; opacity: 1;"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+                                    
+
+                                        <div class="dropdown-menu">
+                                          <% if(orders[i].status !== "Cancelled" && orders[i].status !== "Returned" && orders[i].status !== "Return Approved" && orders[i].status !== "Return disApproved" && orders[i].status !== "Delivered"){ %> 
+                                          
+                                          <div class="dropdown-item" onclick="changestatus('<%= orders[i].orderId %>','Confirmed')">Confirmed</div>
+                                          <div class="dropdown-item" onclick="changestatus('<%= orders[i].orderId %>','Shipped')">Shipped</div>
+                                          <div class="dropdown-item" onclick="changestatus('<%= orders[i].orderId %>','Delivered')">Delivered</div>
+                                          <%}else if(orders[i].status == "Returned"){%>
+                                                <div class="dropdown-item" onclick="changestatus('<%= orders[i].orderId %>','Return Approved')">Approve</div>
+                                                <div class="dropdown-item" onclick="changestatus('<%= orders[i].orderId %>','Return disApproved')">disApprove</div>
+                                          <%} %>
+                                          <div class="dropdown-divider"></div>
+                                          <a class="dropdown-item" href="/admin/vieworderdetails/<%= orders[i].orderId %>">View Order Details</a>
+                                        </div>
+                                      </div>
+                                      <br> <br>
+                                      <% if(orders[i].status=="Delivered"){ %>
+                                      <span class="badge bg-success" id="<%= orders[i].orderId %>"> 
+                                        <%= orders[i].status %></span>
+                                       <% }else if (orders[i].status=="Approved" || orders[i].status=="Shipped"){ %>
+                                        <span class="badge bg-primary" id="<%= orders[i].orderId %>"> 
+                                        <%= orders[i].status %></span>
+                                        <% }else{ %>
+                                          <span class="badge bg-danger" id="<%= orders[i].orderId %>"><%= orders[i].status %></span>
+                                          <% } %>
+                                        </td>
+                                  <td><%= orders[i].paymentmethod %></td>
+                                  
+                                 </tr>
+
+                                <%
+                            }
+
+                          }else{
+                              %>
+                              <tr>
+                                 <td colspan="5">Orders Not Found</td>
+                              </tr>
+                              
+                              <%
+                          }
+                        
+                        %>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+
+      </div>
+    </section>
+
+  </main>
+
+
+<script>
+    $(document).ready(function (){
+      $('#productTables').Datatable();
+    });
+
+
+  </script>
+
+  <script>
+            function changestatus(orderId,value) {
+                 
+                let currvalue = parseInt(document.getElementById(orderId).innerHTML)
+                value = value
+                orderId = orderId
+                    $.ajax({
+                        
+                        url: '/admin/changeorderstatus',
+                        data: {
+                            orderId: orderId,
+                            value: value
+                        },
+                        method: 'post',
+                        success: (response) => {
+                            console.log(response);
+                            document.getElementById(orderId).innerHTML = response.status
+                            
+                        }
+                    })
+                
+            }
+        </script>
+
+<%- include('../layout/admin/admin_footer.ejs') %>

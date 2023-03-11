@@ -1,0 +1,137 @@
+<%- include('../layout/admin/admin_header.ejs') %>
+<%- include('../layout/admin/admin_nav.ejs') %>
+<%- include('../layout/admin/admin_sidebar.ejs') %>
+
+
+
+
+
+<main id="main" class="main">
+  <section class="section">
+    
+      <div class="col-lg-12 ">
+
+        <div class="card p-5" style="background-color: rgb(255, 255, 255);">
+          <div class="card-body">
+            <div class="text-center">
+                <h1 class="text-danger p-4 fw-bold">Add Coupen</h1>
+            </div>
+            
+
+            <!-- General Form Elements -->
+            <form action="" method="post" id="myForm">
+              <div class="row mb-3">
+                <label for="inputText">Coupen Code</label>
+                <div class="col-sm-12">
+                  <input type="text" class="form-control" name="coupencode">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputEmail">Percent Off</label>
+                <div class="col-sm-12">
+                    <input type="number" class="form-control" name="percentoff">
+                  
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <label for="inputEmail" >Max.Discount Amount</label>
+                <div class="col-sm-12">
+                  <input type="number" class="form-control" name="maxdiscount">
+                </div>
+              </div>
+              <div class="row mb-3">
+                
+                <div class="col-sm-5">
+                    <label class="text-center" for="inputPassword">Min.Purchase Amount</label>
+                    <input type="number" class="form-control" name="minpurchase">
+                  </div>
+                <div class="col-sm-7">
+                    <label for="inputPassword">Expiry Date</label>
+                  <input id="date-input" type="date" class="form-control" name="expiry">
+                </div>
+              </div>
+              
+
+              
+
+              <div class="row mb-3">
+                <label class="col-sm-12 col-form-label text-center">Submit Button</label>
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-success btn-block">Save</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+      </div>
+      
+    
+    </section>
+</main>
+
+
+<script>
+  const dateInput = document.getElementById('date-input');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+</script>
+
+
+
+
+<script>
+
+  $('#myForm').submit((event)=>{
+      event.preventDefault();
+      $.ajax({
+          url: '/admin/addcoupens',
+          method: 'POST',
+          data: $('#myForm').serialize(),
+          success: (response)=>{
+              console.log(response);
+              if(response.added){
+                Swal.fire({
+                            title: 'added!',
+                            text: 'Coupen has been added.',
+                            icon: 'success',
+                            showConfirmButton: false,
+                        })
+                        setTimeout(() => {
+                            Swal.close();
+                            location.href = '/admin/viewcoupens'
+                        }, 1000);
+              }else if(response.notadded){
+                Swal.fire({
+                        icon:'error',
+                        title:'Oops...',
+                        text:'Coupen adding failed.'
+                      })
+                      setTimeout(() => {
+                            Swal.close();
+                            location.href = '/admin/viewcoupens'
+                        }, 1000);
+              }else if(response.recent){
+                Swal.fire({
+                        icon:'error',
+                        title:'Oops...',
+                        text:'Coupen already exists.'
+                      })
+                      setTimeout(() => {
+                            Swal.close();
+                            location.href = '/admin/viewcoupens'
+                        }, 1000);
+              }
+          }
+      })
+  })
+  
+</script>
+
+
+
+
+<%- include('../layout/admin/admin_footer.ejs') %>

@@ -1,0 +1,111 @@
+<%- include('../layout/admin/admin_header.ejs') %>
+<%- include('../layout/admin/admin_nav.ejs') %>
+<%- include('../layout/admin/admin_sidebar.ejs') %>
+
+
+<main id="main" class="main">
+  <section class="section">
+
+    
+
+    <section class="section dashboard">
+      <div class="row">
+
+            <!-- Recent Sales -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto" style="background-color: rgb(255, 255, 255);">
+                <div class="text-center mt-5">
+                    <h1 class="fw-bold text-danger">Staff List</h1>
+                  </div><!-- End Page Title -->
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
+
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <h5 class="card-title">Staff List<span>| Today</span></h5>
+  
+                  <table class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phonenumber</th>
+                        <th scope="col">Privilage</th>
+                        <th scope="col">Controls</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+
+                        <%
+                          
+                          if(staffs.length > 0){
+                            for(let i=0; i<staffs.length; i++){
+                                %>
+                                 <tr>
+                                  <td><%= staffs[i].name %></td>
+                                  <td><%= staffs[i].username %></td>
+                                  <td><%= staffs[i].phonenumber %></td>
+                                  <td><%= staffs[i].privilage %></td>
+                                  <td>
+                                     <% if(staffs[i].status == 'Active'){ %>
+                                      <a class="text-danger" href="/admin/blockstaff?id=<%= staffs[i]._id %>">
+                                            Block
+                                      </a>
+                                    
+                                    <% }else{ %>
+                                      <a class="text-success" href="/admin/unblockstaff?id=<%= staffs[i]._id %>">
+                                            Unblock
+                                      </a>
+
+
+                                    <% } %>
+                                    
+                                        
+                                    </td>
+                                 </tr>
+
+                                <%
+                            }
+
+                          }else{
+                              %>
+                              <tr>
+                                 <td colspan="5">Users Not Found</td>
+                              </tr>
+                              
+                              <%
+                          }
+                        
+                        %>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+
+                </div>
+
+              </div>
+            </div><!-- End Recent Sales -->
+
+
+      </div>
+    </section>
+
+  </main>
+
+
+
+<%- include('../layout/admin/admin_footer.ejs') %>

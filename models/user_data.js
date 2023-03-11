@@ -1,0 +1,85 @@
+const mongoose = require("mongoose");
+
+const userData= new mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    username:{
+        type:String,
+        required:true
+    },
+    phonenumber:{
+        type:String,
+        required:true
+    },
+    address:[{
+        name:{
+            type:String,
+            required:true
+        },
+        phonenumber:{
+            type:String,
+            required:true
+        },
+        housename:{
+            type:String,
+            required:true
+        },
+        area:{
+            type:String,
+            required:true
+        },
+        district:{
+            type:String,
+            required:true
+        },
+        state:{
+            type:String,
+            required:true
+        },
+        pincode:{
+            type:String,
+            required:true
+        }
+    }],
+    password:{
+        type:String,
+        required:true
+    },
+    cart:[{
+        productId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Product',
+        },
+        quantity:{
+            type:Number,
+            default:1
+        },
+        producttotal:{
+            type:Number
+        }
+    }],
+    wishlist:[{
+        productId:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Product'
+        }
+    }],
+    carttotal:{
+        type:Number
+    },
+    status:{
+        type:Number,
+        default:true
+    },
+    wallet:{
+        type:Number,
+        default:0,
+        required:true
+    }
+
+})
+
+module.exports = mongoose.model('User',userData);
+

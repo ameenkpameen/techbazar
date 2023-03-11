@@ -1,0 +1,109 @@
+<%- include('../layout/admin/admin_header.ejs') %>
+<%- include('../layout/admin/admin_nav.ejs') %>
+<%- include('../layout/admin/admin_sidebar.ejs') %>
+
+
+
+
+<main id="main" class="main">
+    <section class="section">
+    
+      <div class="col-lg-12 ">
+
+        <div class="card">
+          <div class="card-body p-5" style="background-color: rgb(255, 255, 255);">
+            <div class="text-center">
+                <h1 class="text-danger p-4 fw-bold">Add Staffs</h1>
+            </div>
+            
+
+            <!-- General Form Elements -->
+            <form action="" method="post" enctype="">
+              <div class="row mb-3">
+                <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="name">
+                </div>
+              </div>
+              
+              
+              <div class="row mb-3">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="username">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="singin-password-2" class="col-sm-2 col-form-label">Phone Number *</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="phonenumber">
+                  </div>
+              </div>
+              <div class="row mb-3">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="password">
+                </div>
+              </div>
+              
+              <div class="row mb-3">
+                <label for="inputDate" class="col-sm-2 col-form-label">Privilage</label>
+                <div class="col-sm-10">
+                    <select name="Privilage" class="col-sm-12" id="">
+                        <option selected value="">Select the Privilage</option>
+                         <option value="Sales Manager">Sales Manager</option>
+                         <option value="Sales Staffs">Sales Staffs</option>
+                         <option value="Delivery Boy">Delivery Boy</option>
+                         <option value="Marketing Executive">Marketing Executive</option>
+                        
+                      </select>
+                </div>
+              </div>
+              
+
+              
+
+              <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Submit Button</label>
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+
+          </div>
+        </div>
+
+      </div>
+      
+    
+    </section>
+
+</main>
+<script>
+      const form = document.querySelector("form");
+      const submitbutton = document.querySelector('button[type="submit"]')
+
+
+      submitbutton.addEventListener('click',(event)=>{
+       event.preventDefault()
+        Swal.fire({
+           position: 'top-end',
+           icon: 'success',
+           title: 'Your work has been saved',
+           showConfirmButton: false,
+           timer: 1500
+         }).then(()=>{
+          form.submit()
+         })
+
+      })
+          
+
+
+</script>
+
+
+
+      <%- include('../layout/admin/admin_footer.ejs') %>

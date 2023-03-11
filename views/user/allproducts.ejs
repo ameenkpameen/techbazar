@@ -1,0 +1,941 @@
+<%- include('../layout/user/user_header.ejs') %>
+
+
+
+<body>
+    <div class="page-wrapper">
+        <header class="header header-intro-clearance header-4">
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+                    </div><!-- End .header-left -->
+
+                    <div class="header-right">
+
+                        <ul class="top-menu">
+                            <li>
+                                <a href="#">Links</a>
+                                <ul>
+                                    <li>
+                                        <div class="header-dropdown">
+                                            <a href="#">USD</a>
+                                            <div class="header-menu">
+                                                <ul>
+                                                    <li><a href="#">Eur</a></li>
+                                                    <li><a href="#">Usd</a></li>
+                                                </ul>
+                                            </div><!-- End .header-menu -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="header-dropdown">
+                                            <a href="#">English</a>
+                                            <div class="header-menu">
+                                                <ul>
+                                                    <li><a href="#">English</a></li>
+                                                    <li><a href="#">French</a></li>
+                                                    <li><a href="#">Spanish</a></li>
+                                                </ul>
+                                            </div><!-- End .header-menu -->
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <% if(typeof userData !== 'undefined'){  %>
+
+                                            <a href="/userprofile" class="btn btn-primary btn-round">
+                                                <span class="text-dark"><%= userData.name %></span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </a>
+                                            <a href="/userlogout" class="btn btn-primary btn-round">
+                                                <span class="text-dark">Log Out</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </a>
+                                        
+                                        
+                                        <% }else{ %>
+                                            <a href="/login" class="btn btn-primary btn-round">
+                                                <span class="text-dark">Log in</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </a>
+                                        <% } %>
+                                        
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul><!-- End .top-menu -->
+                    </div><!-- End .header-right -->
+
+                </div><!-- End .container -->
+            </div><!-- End .header-top -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="header-left">
+                        <button class="mobile-menu-toggler">
+                            <span class="sr-only">Toggle mobile menu</span>
+                            <i class="icon-bars"></i>
+                        </button>
+                        
+                        <a href="index.html" class="logo">
+                            <img src="user/assets/images/demos/demo-4/logo.png" alt="Tech Bazar Logo" width="70" height="25">
+                        </a>
+                    </div><!-- End .header-left -->
+
+                    <div class="header-center">
+                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                            <form action="/search_products" method="post">
+                                <div class="header-search-wrapper search-wrapper-wide">
+                                    <label for="q" class="sr-only">Search</label>
+                                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+                                    <input type="search" class="form-control" name="searchKey" id="" placeholder="Search product ..." required >
+                                </div><!-- End .header-search-wrapper -->
+                            </form>
+                        </div><!-- End .header-search -->
+                    </div>
+
+                    <div class="header-right">
+                        <div class="dropdown compare-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
+                                <div class="icon">
+                                    <i class="icon-random"></i>
+                                </div>
+                                <p>Compare</p>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="compare-products">
+                                    <!-- <li class="compare-product">
+                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                        <h4 class="compare-product-title"><a href="product.html">Blue Night Dress</a></h4>
+                                    </li>
+                                    <li class="compare-product">
+                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                        <h4 class="compare-product-title"><a href="product.html">White Long Skirt</a></h4>
+                                    </li> -->
+                                </ul>
+
+                                <div class="compare-actions">
+                                    <a href="#" class="action-link">Clear All</a>
+                                    <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i class="icon-long-arrow-right"></i></a>
+                                </div>
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .compare-dropdown -->
+
+                        <div class="wishlist">
+                            <a href="/viewwishlist" title="Wishlist">
+                                <div class="icon">
+                                    <i class="icon-heart-o"></i>
+                                    <span class="wishlist-count badge">3</span>
+                                </div>
+                                <p>Wishlist</p>
+                            </a>
+                        </div><!-- End .compare-dropdown -->
+
+                        <div class="dropdown cart-dropdown">
+
+                            
+
+                                
+                            <% if(typeof userData !== 'undefined'){  %>
+                            <a href="/viewcart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <div class="icon">
+                                    <i class="icon-shopping-cart"></i>
+                                    <span class="cart-count"><%= cartitems.length %></span>
+                                </div>
+                                <p>Cart</p>
+                            </a>
+                            <% } %> 
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-cart-products">
+                                    <% if(cartitems !== undefined){ %>
+                               
+                                        <% cartitems.forEach((elements)=>{ %>
+                                   
+                                    
+                                    <div class="product">
+                                        <div class="product-cart-details">
+                                            <h4 class="product-title">
+                                                <a href="product.html"><%= elements?.productId?.productname %></a>
+                                            </h4>
+
+                                            <span class="cart-product-info">
+                                                <span class="cart-product-qty"><%= elements?.quantity %></span>
+                                                
+                                            </span>
+                                        </div>
+                                      
+                                        <figure class="product-image-container">
+                                            <a href="product.html" class="product-image">
+                                                <img src="/user_images/<%= elements?.productId?.image[0] %>" alt="product">
+                                            </a>
+                                        </figure>
+                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                    </div>
+
+                                    <% }) %>
+                                 <%}%>
+                                    
+                                </div><!-- End .cart-product -->
+
+                                <!-- <div class="dropdown-cart-total">
+                                    <span>Total</span>
+
+                                    <span class="cart-total-price">$160.00</span>
+                                </div> -->
+                                <div class="dropdown-cart-action">
+                                    <a href="/viewcart" class="btn btn-primary">View Cart</a>
+                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                </div><!-- End .dropdown-cart-total -->
+                            </div><!-- End .dropdown-menu -->
+                                      
+                        </div><!-- End .cart-dropdown -->
+                    </div><!-- End .header-right -->
+                </div><!-- End .container -->
+            </div><!-- End .header-middle -->
+
+            <div class="header-bottom sticky-header">
+                <div class="container">
+                    <div class="header-left">
+                        <div class="dropdown category-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                                Browse Categories <i class="icon-angle-down"></i>
+                            </a>
+
+                            <div class="dropdown-menu">
+                                <nav class="side-nav">
+                                    <ul class="menu-vertical sf-arrows">
+
+                                      <% 
+                                      if(category.length >0){
+                                       for(let j=0; j<category.length; j++){
+                                          %>  
+                                        <li class="item-lead"><a href="/viewcategoryproducts/<%= category[j]._id %>"><%= category[j].categoryname %></a></li>
+                                        <%
+
+                                       } }%>
+
+
+
+
+                                    </ul><!-- End .menu-vertical -->
+                                </nav><!-- End .side-nav -->
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .category-dropdown -->
+                    </div><!-- End .header-left -->
+
+                    <div class="header-center">
+                        <nav class="main-nav">
+                            <ul class="menu sf-arrows">
+                                <li class="">
+                                    <a href="/user" class="sf-with-ul">Home</a>
+                                </li>
+                                
+                                <li class="megamenu-container active">
+                                    <a href="/allproducts" class="sf-with-ul">All Products</a>
+
+                                </li>
+                                
+                            </ul><!-- End .menu -->
+                        </nav><!-- End .main-nav -->
+                    </div><!-- End .header-center -->
+
+                    <div class="header-right">
+                        <i class="la la-lightbulb-o"></i><p>Clearance<span class="highlight">&nbsp;Up to 30% Off</span></p>
+                    </div>
+                </div><!-- End .container -->
+            </div><!-- End .header-bottom -->
+        </header><!-- End .header -->
+
+        <main class="main">
+            
+
+            <div class="container mt-5 pt-4 pb-2" style="border-radius: 20px; background-color: rgb(246, 246, 246); ">
+                <h2 class="title text-center mb-5">Explore Popular Categories</h2><!-- End .title text-center -->
+                
+                <div class="cat-blocks-container">
+                    <div class="row">
+                        <% category.forEach((element)=>{ %>
+                        <div class="col-6 col-sm-4 col-lg-4">
+                            <a href="/viewcategoryproducts/<%= element._id %>" class="cat-block">
+                                <figure>
+                                    <span>
+                                        <img src="/user_images/<%=element.categoryImage %>" alt="Category image">
+                                    </span>
+                                </figure>
+
+                                <h3 class="cat-block-title"><%= element.categoryname %></h3><!-- End .cat-block-title -->
+                            </a>
+                        </div><!-- End .col-sm-4 col-lg-2 -->
+                       <% }) %>
+                        
+                        
+
+                        
+                    </div><!-- End .row -->
+                </div><!-- End .cat-blocks-container -->
+            </div><!-- End .container -->
+
+
+            <div class="container featured p-3">
+                
+
+                <div class="tab-content tab-content-carousel">
+                    <div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel" aria-labelledby="products-featured-link">
+                         
+                        <div class="row" id="searchResult">
+                                   
+                                     
+                                        <% 
+                                           if(products.length >0){
+                                
+                                             for(let i=0; i<products.length; i++){
+                                                 %>
+                                    
+                                                
+                                   
+                                  <div class="product product-2 col-lg-3 p-5 m-5" style="border: 0.2rem solid #cfcfcf; margin-bottom: 2rem; border-radius: 10px;" id="">
+                                    
+                                     <figure class="product-media">
+                                          <a href="">
+                                              <img src="/user_images/<%= products[i].image[0] %>" alt="<%= products[i].image %>" height="50px" class="product-image">
+                                          </a>
+      
+                                          <div class="product-action-vertical">
+                                              <% if(wishnameArray.includes(products[i].productname)){ %>
+                                                <a href="/viewwishlist" class="btn-product-icon btn-wishlist btn-expandable"><span>View wishlist</span></a>
+                                                <% }else{%>
+                                                    <a href="/addtowishlist/<%= products[i]._id %>" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                                <%}%>
+                                              
+                                          </div>
+                                          
+      
+                                          <div class="product-action product-action-dark">
+                                                
+                                            <% if (nameArray.includes(products[i].productname)==false) { %>
+                                                <div onclick="validate('<%= products[i]._id %>')" class="btn-product btn-cart" title="Add to cart" o><span>add to cart</span></div>
+                                                 <% } else { %>
+                                                    <a href="/viewcart" class="btn-product btn-cart" title="Add to cart"><span>view cart</span></a>
+                                                 <% } %>
+                                                
+                                              
+                                                
+                                                 
+                                                
+                                               
+                                               <a href="/viewproduct/<%= products[i]._id %>" class="btn-product " ><span>quick view</span></a>
+                                               
+                                          </div>
+                                          
+                                    
+                                     </figure>
+
+                                    <div class="product-body">
+                                         <div class="product-cat">
+                                             <a href="#"> <%= products[i].brand %> </a>
+                                         </div>
+                                         <h3 class="product-title"><a href="product.html"> <%= products[i].productname %> </a></h3>
+                                         <div class="product-price">
+                                             ₹ <%= products[i].price %>
+                                         </div>
+                                        <div class="ratings-container">
+                                                <div class="ratings">
+                                                    <div class="ratings-val" style="width: 60%;"></div>
+                                                </div>
+                                               <span class="ratings-text">( 2 Reviews )</span>
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                 
+                            
+
+
+                              <%
+
+                                }
+                              }
+                            
+                              %> 
+                            
+
+                            </div>
+
+                        
+                        
+
+                        </div>   <!-- End .product -->
+
+                                        <div class="d-flex align-items-center justify-content-center">
+                                             <nav aria-label="Page navigation example">
+                                                <ul class="pagination">
+                                                  <li class="page-item">
+                                                    <% if (page > 1) { %>
+                                                    <a class="page-link" href="/allproducts?page=<%= page - 1 %>" aria-label="Previous">
+                                                      <span aria-hidden="true">&laquo;</span>
+                                                      <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <% } %>
+                                                  </li>
+
+                                                  <% for (let i = 1; i <= totalPages; i++) { %>
+                                                     <% if (i === page) { %>
+                                                       <li class="page-link text-danger"><%= i %></li>
+                                                     <% } else { %>
+                                                        <a class="page-link" href="/allproducts?page=<%= i %>"><%= i %></a>
+                                                        <% } %>
+                                                  <% } %>
+
+                                                  <li class="page-item">
+                                                    <% if (page < totalPages) { %>
+                                                    <a class="page-link" href="/allproducts?page=<%= page + 1 %>" aria-label="Next">
+                                                      <span aria-hidden="true">&raquo;</span>
+                                                      <span class="sr-only">Next</span>
+                                                    </a>
+                                                    <% } %>
+                                                  </li>
+                                                </ul>
+                                              </nav>
+                                            </div>
+                    </div><!-- .End .tab-pane -->
+                    
+                </div><!-- End .tab-content -->
+            </div>
+            
+
+            
+
+            
+
+            <div class="container">
+                <hr class="mb-0">
+                <div class="row">
+                    
+                    <h4 class="text-center">Popular Brands</h4>
+                </div>
+                
+                <div class="owl-carousel mt-5 mb-5 owl-simple" data-toggle="owl" 
+                    data-owl-options='{
+                        "nav": false, 
+                        "dots": false,
+                        "margin": 30,
+                        "loop": false,
+                        "responsive": {
+                            "0": {
+                                "items":2
+                            },
+                            "420": {
+                                "items":3
+                            },
+                            "600": {
+                                "items":4
+                            },
+                            "900": {
+                                "items":5
+                            },
+                            "1024": {
+                                "items":6
+                            }
+                        }
+                    }'>
+
+                    
+                    <a href="#" class="brand">
+                        <img src="assets/images/brands/14.png" alt="Brand Name">
+                    </a>
+
+                    <a href="#" class="brand">
+                        <img src="assets/images/brands/11.png" alt="Brand Name">
+                    </a>
+
+                    <a href="#" class="brand">
+                        <img src="assets/images/brands/12.png" alt="Brand Name">
+                    </a>
+
+                    <a href="#" class="brand">
+                        <img src="assets/images/brands/13.png" alt="Brand Name">
+                    </a>
+
+                    <a href="#" class="brand">
+                        <img src="assets/images/brands/10.png" alt="Brand Name">
+                    </a>
+
+                    <a href="#" class="brand">
+                        <img src="assets/images/brands/15.png" alt="Brand Name">
+                    </a>
+                </div><!-- End .owl-carousel -->
+            </div><!-- End .container -->
+
+            <!-- End .bg-light pt-5 pb-6 -->
+
+            <div class="mb-5"></div><!-- End .mb-5 -->
+
+            <!-- End .container -->
+
+            <div class="mb-4"></div><!-- End .mb-4 -->
+
+            <div class="container">
+                <hr class="mb-0">
+            </div><!-- End .container -->
+
+            <div class="icon-boxes-container bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-rocket"></i>
+                                </span>
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                                    <p>Orders $50 or more</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-rotate-left"></i>
+                                </span>
+
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                                    <p>Within 30 days</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-info-circle"></i>
+                                </span>
+
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                                    <p>when you sign up</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="icon-box icon-box-side">
+                                <span class="icon-box-icon text-dark">
+                                    <i class="icon-life-ring"></i>
+                                </span>
+
+                                <div class="icon-box-content">
+                                    <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                                    <p>24/7 amazing services</p>
+                                </div><!-- End .icon-box-content -->
+                            </div><!-- End .icon-box -->
+                        </div><!-- End .col-sm-6 col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .icon-boxes-container -->
+        </main><!-- End .main -->
+
+        <footer class="footer" style="background-image: url('user/assets/images/asas.jpg');">
+            <div class="cta bg-image bg-dark pt-4 pb-5 mb-0" style="background-image: url(assets/images/demos/demo-4/bg-5.jpg);">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-10 col-md-8 col-lg-6">
+                            <div class="cta-heading text-center">
+                                <h3 class="cta-title text-white">Get The Latest Deals</h3><!-- End .cta-title -->
+                                <p class="cta-desc text-white">and receive <span class="font-weight-normal">$20 coupon</span> for first shopping</p><!-- End .cta-desc -->
+                            </div><!-- End .text-center -->
+                        
+                            <form action="#">
+                                <div class="input-group input-group-round">
+                                    <input type="email" class="form-control form-control-white" placeholder="Enter your Email Address" aria-label="Email Adress" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit"><span>Subscribe</span><i class="icon-long-arrow-right"></i></button>
+                                    </div><!-- .End .input-group-append -->
+                                </div><!-- .End .input-group -->
+                            </form>
+                        </div><!-- End .col-sm-10 col-md-8 col-lg-6 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .cta -->
+        	<div class="footer-middle">
+	            <div class="container">
+	            	<div class="row">
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget widget-about">
+	            				<img src="user/assets/images/demos/demo-4/techbazar.png" class="footer-logo" alt="Footer Logo" width="60" height="25">
+	            				<p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+
+	            				<div class="widget-call">
+                                    <i class="icon-phone"></i>
+                                    Got Question? Call us 24/7
+                                    <a href="tel:#">+0123 456 789</a>         
+                                </div><!-- End .widget-call -->
+	            			</div><!-- End .widget about-widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="about.html">About TechBazar</a></li>
+                                    <li><a href="#">Our Services</a></li>
+	            					<li><a href="#">How to shop on TechBazar</a></li>
+	            					<li><a href="faq.html">FAQ</a></li>
+	            					<li><a href="contact.html">Contact us</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">Customer Service</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="#">Payment Methods</a></li>
+	            					<li><a href="#">Money-back guarantee!</a></li>
+	            					<li><a href="#">Returns</a></li>
+	            					<li><a href="#">Shipping</a></li>
+	            					<li><a href="#">Terms and conditions</a></li>
+	            					<li><a href="#">Privacy Policy</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+
+	            		<div class="col-sm-6 col-lg-3">
+	            			<div class="widget">
+	            				<h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+	            				<ul class="widget-list">
+	            					<li><a href="#">Sign In</a></li>
+	            					<li><a href="#">View Cart</a></li>
+	            					<li><a href="#">My Wishlist</a></li>
+	            					<li><a href="#">Track My Order</a></li>
+	            					<li><a href="#">Help</a></li>
+	            				</ul><!-- End .widget-list -->
+	            			</div><!-- End .widget -->
+	            		</div><!-- End .col-sm-6 col-lg-3 -->
+	            	</div><!-- End .row -->
+	            </div><!-- End .container -->
+	        </div><!-- End .footer-middle -->
+
+	        <div class="footer-bottom">
+	        	<div class="container">
+	        		<p class="footer-copyright">Copyright © 2019 TechBazar Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+	        		<figure class="footer-payments">
+	        			<img src="user/assets/images/payments.png" alt="Payment methods" width="272" height="20">
+	        		</figure><!-- End .footer-payments -->
+	        	</div><!-- End .container -->
+	        </div><!-- End .footer-bottom -->
+        </footer><!-- End .footer -->
+    </div><!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
+
+    <div class="mobile-menu-container mobile-menu-light">
+        <div class="mobile-menu-wrapper">
+            <span class="mobile-menu-close"><i class="icon-close"></i></span>
+            
+            <form action="#" method="get" class="mobile-search">
+                <label for="mobile-search" class="sr-only">Search</label>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
+                <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
+            </form>
+
+            <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab" role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab" aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel" aria-labelledby="mobile-menu-link">
+                    <nav class="mobile-nav">
+                        <ul class="mobile-menu">
+                            <li class="active">
+                                <a href="/user">Home</a>
+                            </li>
+                            <li>
+                                <a href="category.html">Shop</a>
+                                
+                            </li>
+                            <li>
+                                <a href="product.html" class="sf-with-ul">Products</a>
+                                
+                            </li>
+                  
+                        </ul>
+                    </nav><!-- End .mobile-nav -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
+                    <nav class="mobile-cats-nav">
+                        <ul class="mobile-cats-menu">
+                            <li><a class="mobile-cats-lead" href="#">Daily offers</a></li>
+                            <li><a class="mobile-cats-lead" href="#">Gift Ideas</a></li>
+                            <% 
+                                      if(category.length >0){
+                                       for(let j=0; j<category.length; j++){
+                                          %>  
+                                        <li class="item-lead"><a href="/viewcategoryproducts?name=<%= category[j].categoryname %>"><%= category[j].categoryname %></a></li>
+                                        <%
+
+                                       } }%>
+                            
+                        </ul><!-- End .mobile-cats-menu -->
+                    </nav><!-- End .mobile-cats-nav -->
+                </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
+
+            <div class="social-icons">
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+            </div><!-- End .social-icons -->
+        </div><!-- End .mobile-menu-wrapper -->
+    </div><!-- End .mobile-menu-container -->
+
+    <!-- Sign in / Register Modal -->
+    <div class="modal fade" id="signin-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon-close"></i></span>
+                    </button>
+
+                    <div class="form-box">
+                        <div class="form-tab">
+                            <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Sign In</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="tab-content-5">
+                                <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <label for="singin-email">Username or email address *</label>
+                                            <input type="text" class="form-control" id="singin-email" name="singin-email" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="singin-password">Password *</label>
+                                            <input type="password" class="form-control" id="singin-password" name="singin-password" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>LOG IN</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="signin-remember">
+                                                <label class="custom-control-label" for="signin-remember">Remember Me</label>
+                                            </div><!-- End .custom-checkbox -->
+
+                                            <a href="#" class="forgot-link">Forgot Your Password?</a>
+                                        </div><!-- End .form-footer -->
+                                    </form>
+                                    <div class="form-choice">
+                                        <p class="text-center">or sign in with</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-g">
+                                                    <i class="icon-google"></i>
+                                                    Login With Google
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-f">
+                                                    <i class="icon-facebook-f"></i>
+                                                    Login With Facebook
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .form-choice -->
+                                </div><!-- .End .tab-pane -->
+                                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                    <form action="#">
+                                        <div class="form-group">
+                                            <label for="register-email">Your email address *</label>
+                                            <input type="email" class="form-control" id="register-email" name="register-email" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-group">
+                                            <label for="register-password">Password *</label>
+                                            <input type="password" class="form-control" id="register-password" name="register-password" required>
+                                        </div><!-- End .form-group -->
+
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn btn-outline-primary-2">
+                                                <span>SIGN UP</span>
+                                                <i class="icon-long-arrow-right"></i>
+                                            </button>
+
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="register-policy" required>
+                                                <label class="custom-control-label" for="register-policy">I agree to the <a href="#">privacy policy</a> *</label>
+                                            </div><!-- End .custom-checkbox -->
+                                        </div><!-- End .form-footer -->
+                                    </form>
+                                    <div class="form-choice">
+                                        <p class="text-center">or sign in with</p>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login btn-g">
+                                                    <i class="icon-google"></i>
+                                                    Login With Google
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                            <div class="col-sm-6">
+                                                <a href="#" class="btn btn-login  btn-f">
+                                                    <i class="icon-facebook-f"></i>
+                                                    Login With Facebook
+                                                </a>
+                                            </div><!-- End .col-6 -->
+                                        </div><!-- End .row -->
+                                    </div><!-- End .form-choice -->
+                                </div><!-- .End .tab-pane -->
+                            </div><!-- End .tab-content -->
+                        </div><!-- End .form-tab -->
+                    </div><!-- End .form-box -->
+                </div><!-- End .modal-body -->
+            </div><!-- End .modal-content -->
+        </div><!-- End .modal-dialog -->
+    </div><!-- End .modal -->
+
+
+
+    <script>
+        
+        async function searchProduct(data){
+            const searchReasult = document.getElementById('searchResult');
+            try{
+                const response = await fetch("getProduct",{
+                    method:'post',
+                    headers:{'Content-Type': 'application/json'},
+                    body: JSON.stringify({payload: data.value})
+                }).then(res => res.json())
+                .then(data =>{
+                    let payload = data.payload
+                    searchResult.innerHTML = ''
+                    
+                    
+                    payload.forEach(element =>{
+                        searchReasult.innerHTML += `
+                     <div class="tab-pane p-0 fade show active" id="products-featured-tab" role="tabpanel" aria-labelledby="products-featured-link">
+                        <div class="row">
+                            <div class="product product-2 col-lg-6 p-5 m-5" style="border: 0.2rem solid #cfcfcf; margin-bottom: 2rem; border-radius: 10px;">
+                               
+                                <figure class="product-media">
+                                     <a href="">
+                                         <img src="/user_images/${element.image[0]}" alt="Product-Image" height="50px" width="150px" class="product-image">
+                                     </a>
+ 
+                                     
+ 
+                                     <div class="product-action product-action-dark">
+                                        
+                                         <a href="/viewproduct/${element._id}" class="btn-product " ><span>quick view</span></a>
+                                          
+                                     </div>
+                                     
+                               
+                                </figure>
+
+                                <div class="product-body">
+                                    <div class="product-cat">
+                                        <a href="#"> ${element.brand}</a>
+                                    </div>
+                                    <h3 class="product-title"><a href="product.html">${element.productname}</a></h3>
+                                    <div class="product-price">
+                                        ₹ ${element.price}
+                                    </div>
+                                   <div class="ratings-container">
+                                           <div class="ratings">
+                                               <div class="ratings-val" style="width: 60%;"></div>
+                                           </div>
+                                          <span class="ratings-text">( 2 Reviews )</span>
+                                   
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                         </div>
+                        </div><!-- .End .tab-pane -->`
+                    });
+
+                    return;
+                })
+            } catch(error){
+                console.log(error);
+            }
+        }
+        
+        
+        
+        
+        
+    </script>
+
+
+
+    
+
+    <script>
+    function validate(productId) {
+        productId = productId
+        
+            $.ajax({
+                url: '/addtocart',
+                data: {
+                    productId: productId
+                },
+                method: 'post',
+                success: (response) => {
+                      if(response.success){
+                        Swal.fire({
+                            title: 'added!',
+                            text: 'Item has been added to your Cart.',
+                            icon: 'success',
+                            showConfirmButton: false
+                        })
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000);
+                      }else if(response.login){
+                           Swal.fire({
+                               icon: 'error',
+                               title: 'Oops...',
+                               text: 'Please login to access your Cart.',
+                           })
+                           setTimeout(() => {
+                           Swal.close();
+                           location.href = '/login'
+                           }, 1000);
+                      }
+                   
+                }
+            })
+          
+        
+    }
+</script> 
+
+
+
+<%- include('../layout/user/user_footer.ejs') %>

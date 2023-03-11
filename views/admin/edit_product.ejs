@@ -1,0 +1,296 @@
+<%- include('../layout/admin/admin_header.ejs') %>
+<%- include('../layout/admin/admin_nav.ejs') %>
+<%- include('../layout/admin/admin_sidebar.ejs') %>
+
+
+
+<main id="main" class="main">
+<div class="">
+    
+    <section class="section">
+        
+          <div class="col-lg-12 ">
+    
+            <div class="card" id="cardarea">
+              <div class="card-body">
+                <div class="text-center">
+                    <h1 class="text-danger p-4 fw-bold">Edit Product</h1>
+                </div>
+                
+    
+                <!-- General Form Elements -->
+                <%productData.forEach((products)=>{%>
+                <form action="/admin/editproduct/<%= products._id %>" method="post" enctype="multipart/form-data" id="mainForm">
+                  
+                  <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label" >Product Name</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="productname" value="<%= products.productname %>" >
+                      <input type="text" class="form-control d-none" name="productId" value="<%= products._id %>" >
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Category</label>
+                    <div class="col-sm-10">
+                      <select name="categoryname" class="col-sm-12" id="">
+                        
+                        <option value="<%= products.category._id %>" selected><%= products.category.categoryname %></option>
+                        <% categoryData.forEach(element=>{ %>
+                            <option value="<%= element._id %>">
+                             <%= element.categoryname %>
+                            </option>
+                             <% }); %>
+                      </select>
+                      
+                    </div>
+                  </div>
+                  
+                  <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Brand</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="brand" value="<%= products.brand %>">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Discription</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" name="discription" value="<%= products.discription %>">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Images</label>
+                    <div class="col-lg-6" style="display: flex; justify-content: center;">
+                      
+                      <%
+                          
+                      if(products.image.length > 0){
+                        for(let i=0; i<products.image.length; i++){
+                            %>
+                             <div style="border: 1px solid black; margin: 10px; border-radius: 10px;" class="p-2">
+                             <img class="mx-2" src="/user_images/<%= products.image[i] %>" alt="<%= products.image[i] %>" width="100px" height="100px">
+                             <span id="boot-icon" onclick="validate('<%= products._id %>','<%= products.image[i] %>')" class="bi bi-trash" style="font-size: 25px; color: rgb(255, 0, 0); opacity: 1; -webkit-text-stroke-width: 0.3px;"></span>
+                            </div>
+                            <% }}  %>
+                         
+
+                    </div>
+                  </div>
+
+
+                  
+
+                  
+                  <div class="row mb-3">  
+                    <div class="col-sm-2">
+                      Add Images</div>
+                    <div class="col-sm-10">
+                          <button type="button" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#formModal">Add Images </button>
+                      </div>                     
+                   </div>
+
+                   
+
+                  
+                  <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Price</label>
+                    <div class="col-sm-10">
+                      <input type="Number" class="form-control" name="price" value="<%= products.price %>">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputTime" class="col-sm-2 col-form-label">Number of Orders</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" name="orders" value="<%= products.orders %>">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputTime" class="col-sm-2 col-form-label">In stock</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control" name="stock" value="<%= products.stock %>">
+                    </div>
+                  </div>
+    
+                  
+    
+                  <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Submit Button</label>
+                    <div class="col-sm-10">
+                      <button type="submit"  id="mainButton" class="btn btn-success btn-block">Save</button>
+                    </div>
+                  </div>
+                  
+                </form><!-- End General Form Elements -->
+                <div class="modal fade" id="formModal" tabindex="2" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                     <div class="modal-dialog">
+                       <div class="modal-content">
+                        <form action="/admin/addproductimage" method="post" enctype="multipart/form-data" id="modalForm">
+                         <div class="modal-header">
+                           <h1 class="modal-title fs-5 font-weight-bold text-danger text-center" id="exampleModalLabel">Edit Image</h1>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                         </div>
+                         <div class="modal-body">
+                          <div class="row">
+                             
+                                 <div class="col-sm-12 pt-5">
+                                   <input multiple type="file" class="form-control" name="image" accept="image/*">
+                                   <input type="text" name="productId" value="<%= products._id %>" class="d-none">
+                                 </div>
+                                 
+                          </div>
+                         </div>
+                         <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                           <button type="submit" id="modalButton" class="btn btn-danger">Add Images</button>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </div>
+                <% }) %>
+    
+              </div>
+            </div>
+    
+          </div>
+          
+        
+        </section>
+    
+    </div>
+  </main>
+
+
+  <script>
+    function validate(productId,imagename) {
+        productId = productId
+        imagename= imagename
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Are you want to delete this image!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Remove it!'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+                url: '/admin/deleteproductimage',
+                data: {
+                    productId: productId,
+                    image:imagename
+                },
+                method: 'post',
+                success: (response) => {
+                    
+                        Swal.fire({
+                            title: 'Removed!',
+                            text: 'Item has been Removed.',
+                            icon: 'success',
+                            showConfirmButton: false
+                        })
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000);
+                   
+                }
+            })
+          }
+        })
+    }
+</script>
+
+    
+
+
+  <script>
+       
+       const modalButton = document.getElementById('modalButton');
+       modalButton.addEventListener('click', (event) =>{
+         event.preventDefault()
+         const formData = new FormData(modalForm);
+         const xhr = new XMLHttpRequest();
+         xhr.open('POST', '/admin/addproductimage');
+         xhr.send(formData)
+         xhr.onload= function(){
+           if(xhr.status === 200) {
+            
+             const response = JSON.parse(xhr.responseText);
+             console.log(response);
+             const modal = document.getElementById('formModal')
+             const modalInstance = bootstrap.Modal.getInstance(modal)
+             modalInstance.hide();
+             if(response.success) {
+             Swal.fire({
+               icon: 'success',
+               title:'New Image Added Successfully',
+               showConfirmButton: false,
+               timer:4000
+             })
+            }else if(response.image) {
+              Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Maximum image length exeeded.',
+                        
+                    })
+            }
+             setTimeout(() => {
+                   location.reload()
+             }, 1000);
+             // location.reload();
+           }else{
+             console.error('Request failed. Error code:', xhr.status);
+           }
+         }
+       })
+       
+       
+       
+       </script>
+
+
+     
+
+       <script>
+    $(document).ready(function() {
+    $("#mainForm").submit(function(event) {
+        event.preventDefault(); // prevent default form submit behavior
+        var formData = $(this).serialize(); // serialize form data
+        console.log(formData);
+        $.ajax({
+            type: "POST",
+            url: "/admin/editproduct", // replace with your server-side script URL
+            data: formData,
+            success: (response)=> {
+                if(response.success){
+                console.log(response);
+                Swal.fire({
+                            title: 'Edited!',
+                            text: 'Product has been edited.',
+                            icon: 'success',
+                            showConfirmButton: false
+                        })
+                        setTimeout(() => {
+                            Swal.close();
+                            // $('#formModal').modal('hide');
+                            // $('#formModal').on('hidden.bs.modal', function (){
+                            //     $(this).find('form').trigger('reset');
+                            // })
+                            location.href = '/admin/viewproducts'
+                        }, 1000);
+                
+                
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+         });
+       });
+     });
+  </script>
+
+
+<%- include('../layout/admin/admin_footer.ejs') %>
