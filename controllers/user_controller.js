@@ -269,24 +269,22 @@ async function getingProducts(page,search) {
   return products;
 }
 
-const searchingProducts=async(req,res,next)=>{
+const searchingProducts = async (req, res, next) => {
   try {
-   
-    if(req.session.user){
+
+    if (req.session.user) {
       const userdetails = req.session.user
-      console.log(req.body);
       const searchKey = req.body.searchKey
       const search = new RegExp(searchKey, 'i')
       const page = parseInt(req.query.page) || 1;
-      const products = await getingProducts(page,search);
+      const products = await getingProducts(page, search);
       const count = await Product.countDocuments().exec();
       const totalPages = Math.ceil(count / PAGE_SIZE);
-      
+
 
       const cartData = await User.findOne({ _id: req.session.user._id })
         .populate("cart.productId")
         .exec();
-      // console.log(cartData);
       cartArray = [];
       cartData.cart.forEach((element) => {
         cartArray.push(element);
@@ -303,7 +301,7 @@ const searchingProducts=async(req,res,next)=>{
         .populate("wishlist.productId")
         .exec();
       //
-       
+
 
       const wishArray = [];
       wishData.wishlist.forEach((element) => {
@@ -316,26 +314,26 @@ const searchingProducts=async(req,res,next)=>{
       });
       // const products = await Product.find({ name: search,status:"List"}).sort({price:-1})
       const categorydata = await Category.find({})
-      res.render('allproducts', { category: categorydata, products: products, userData: userdetails,search:true,cartitems:cartArray,wishnameArray:wishnameArray,nameArray:nameArray,page,totalPages })
-    }else{
+      res.render('allproducts', { category: categorydata, products: products, userData: userdetails, search: true, cartitems: cartArray, wishnameArray: wishnameArray, nameArray: nameArray, page, totalPages })
+    } else {
       console.log(req.body);
       const searchKey = req.body.searchKey
       const search = new RegExp(searchKey, 'i')
       // const products = await Product.find({ name: search,status:"List"}).sort({price:-1})
       const categorydata = await Category.find({})
       const page = parseInt(req.query.page) || 1;
-      const products = await getingProducts(page,search);
+      const products = await getingProducts(page, search);
       const count = await Product.countDocuments().exec();
       const totalPages = Math.ceil(count / PAGE_SIZE);
       var userDetails = undefined
       var cartArray = undefined
       var nameArray = "null"
       var wishnameArray = "null"
-      res.render('allproducts', { category: categorydata, products: products,search:true,userData:userDetails,cartitems:cartArray,wishnameArray:wishnameArray,nameArray:nameArray,page,totalPages })
+      res.render('allproducts', { category: categorydata, products: products, search: true, userData: userDetails, cartitems: cartArray, wishnameArray: wishnameArray, nameArray: nameArray, page, totalPages })
     }
-   } catch (error) {
+  } catch (error) {
     next(error);
-  }
+  }
 }
 
 
@@ -390,11 +388,7 @@ const verifyUser = async (req, res) => {
 const user_profile = async (req, res) => {
   try {
     if (req.session.user) {
-
-
       const userDetails = await User.findOne({ _id: req.session.user._id });
-
-
       res.render("profile", { userDetails: userDetails });
     } else {
       res.redirect('/user')
