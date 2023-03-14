@@ -41,7 +41,7 @@ const loadRegister = async (req, res) => {
     const productData = await Product.find({}).limit(5);
     
     const categoryData = await Category.find({});
-    const banners = await Banner.find({});
+    const banner = await Banner.find({});
     var userDetails = undefined
     var cartArray = undefined
     var nameArray = "null"
@@ -90,7 +90,7 @@ const loadRegister = async (req, res) => {
       cartitems: cartArray,
       wishnameArray: wishnameArray,
       nameArray: nameArray,
-      banners:banners
+      banners:banner
     });
     
   } catch (error) {
@@ -364,7 +364,7 @@ const verifyUser = async (req, res) => {
 
             // console.log(userData);
             // console.log("redirecting");
-            res.redirect("/user");
+            res.redirect("/");
           } else {
             req.session.loginErrorMsg = "You are blocked by Admin"
             res.redirect("back");
@@ -391,7 +391,7 @@ const user_profile = async (req, res) => {
       const userDetails = await User.findOne({ _id: req.session.user._id });
       res.render("profile", { userDetails: userDetails });
     } else {
-      res.redirect('/user')
+      res.redirect('/')
     }
   } catch (error) {
     console.log(error.message);
@@ -413,7 +413,7 @@ const user_wallet = async (req, res) => {
       })
       res.render("wallet",{wallet:walletBalance,usage:total});
     } else {
-      res.redirect('/user')
+      res.redirect('/')
     }
   } catch (error) {
     console.log(error.message);
@@ -512,7 +512,7 @@ const add_an_address = async (req, res) => {
 
       res.redirect("/userprofile");
     } else {
-      res.redirect("/userprofile");
+      res.redirect("/");
     }
 
   } catch (error) {
@@ -797,7 +797,7 @@ const verifyotp = async (req, res) => {
           await user.save();
 
           console.log("user verified");
-          res.redirect("/user");
+          res.redirect("/");
 
         } else {
           console.log(error.message);
@@ -953,7 +953,7 @@ const user_cart = async (req, res) => {
         res.json({ success: true });
       }else{
         // res.json({ success: false})
-        res.redirect("/user");
+        res.redirect("/");
       }
       
       
@@ -1023,6 +1023,9 @@ const removefrom_cart = async (req, res) => {
   }
 };
 
+
+
+
 const view_cart = async (req, res) => {
   try {
     if (req.session.user) {
@@ -1067,11 +1070,6 @@ const view_cart = async (req, res) => {
     console.log(error.message);
   }
 };
-
-
-
-
-
 
 
 

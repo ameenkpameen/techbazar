@@ -69,7 +69,7 @@
                 </div><!-- End .container -->
             </div><!-- End .header-top -->
 
-            <div class="header-middle">
+            <div class="header-middle bg-dark">
                 <div class="container">
                     <div class="header-left">
                         <button class="mobile-menu-toggler">
@@ -98,7 +98,7 @@
                     <div class="header-right">
                         <div class="dropdown compare-dropdown">
                             <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
-                                <div class="icon">
+                                <div class="icon text-white">
                                     <i class="icon-random"></i>
                                 </div>
                                 <p>Compare</p>
@@ -125,9 +125,9 @@
 
                         <div class="wishlist">
                             <a href="/viewwishlist" title="Wishlist">
-                                <div class="icon">
+                                <div class="icon text-white">
                                     <i class="icon-heart-o"></i>
-                                    <span class="wishlist-count badge">3</span>
+                                    
                                 </div>
                                 <p>Wishlist</p>
                             </a>
@@ -140,7 +140,7 @@
                                 
                             <% if(typeof userData !== 'undefined'){  %>
                             <a href="/viewcart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <div class="icon">
+                                <div class="icon text-white">
                                     <i class="icon-shopping-cart"></i>
                                     <span class="cart-count"><%= cartitems.length %></span>
                                 </div>
@@ -230,7 +230,7 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="">
-                                    <a href="/user" class="sf-with-ul">Home</a>
+                                    <a href="/" class="sf-with-ul">Home</a>
                                 </li>
                                 
                                 <li class="megamenu-container active">

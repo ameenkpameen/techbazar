@@ -5,7 +5,7 @@ const islogin = async(req,res,next)=>{
     try{
       if(req.session.user){}
       else{
-          res.redirect('/user');
+          res.redirect('/');
       }
       next()
     }catch (error){
@@ -20,7 +20,7 @@ const islogin = async(req,res,next)=>{
       try{
         if(req.session.user){
           // const productData = await Product.find({})
-          res.redirect('/user');
+          res.redirect('/');
         }
        
         next()
@@ -37,7 +37,7 @@ const islogin = async(req,res,next)=>{
       try{
         
         req.session.user = null
-        res.redirect('/user');
+        res.redirect('/');
       }catch (error){
     
         console.log(error.message);

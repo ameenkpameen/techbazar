@@ -78,7 +78,7 @@
                         </button>
                         
                         <a href="index.html" class="logo">
-                            <img src="assets/images/demos/demo-4/logo.png" alt="Tech Bazar Logo" width="70" height="25">
+                            <img src="/user/assets/images/demos/demo-4/logo.png" alt="Tech Bazar Logo" width="70" height="25">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -241,7 +241,7 @@
                         <nav class="main-nav">
                             <ul class="menu sf-arrows">
                                 <li class="megamenu-container active">
-                                    <a href="/user" class="sf-with-ul">Home</a>
+                                    <a href="/" class="sf-with-ul">Home</a>
                                 </li>
                                 
                                 <li>
@@ -261,7 +261,11 @@
         </header><!-- End .header -->
 
         <main class="main">
+
+
+
             <div class="intro-slider-container mb-5">
+                
                 <div class="intro-slider owl-carousel owl-theme owl-nav-inside owl-light" data-toggle="owl" 
                     data-owl-options='{
                         "dots": true,
@@ -274,26 +278,29 @@
                         }
                     }'>
                     <% banners.forEach((element)=>{ %>
-                    <div class="intro-slide" style="background-image: url(/user_images/<%=element.image%>);">
+                      
+                      <div class="intro-slide" style="background-image: url(/user_images/<%=element.image%>);">
                         <div class="container intro-content">
                             <div class="row justify-content-end">
                                 <div class="col-auto col-sm-7 col-md-6 col-lg-5">
                                     <h3 class="intro-subtitle text-dark">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
-                                    <h1 class="intro-title" style="color: black;"><%=element.description%></h1 >
+                                    <h1 class="intro-title" style="color: black;"><%=element.description%></h1>
                                     <h3 class="" style="color: black;"><%=element.subDescription%></h3><!-- End .intro-title -->
 
                                     
                                 </div><!-- End .col-lg-11 offset-lg-1 -->
                             </div><!-- End .row -->
                         </div><!-- End .intro-content -->
-                    </div><!-- End .intro-slide -->
-                    <% }) %>
-
-                    
+                      </div><!-- End .intro-slide -->
+                      
+                      <% }) %>
                 </div><!-- End .intro-slider owl-carousel owl-simple -->
-
+                
                 <span class="slider-loader"></span><!-- End .slider-loader -->
             </div><!-- End .intro-slider-container -->
+
+
+            
 
             <div class="container">
                 <h2 class="title text-center mb-5">Explore Popular Categories</h2><!-- End .title text-center -->
@@ -578,7 +585,7 @@
 	            	<div class="row">
 	            		<div class="col-sm-6 col-lg-3">
 	            			<div class="widget widget-about">
-	            				<img src="assets/images/demos/demo-4/techbazar.png" class="footer-logo" alt="Footer Logo" width="60" height="25">
+	            				<img src="/user/assets/images/demos/demo-4/techbazar.png" class="footer-logo" alt="Footer Logo" width="60" height="25">
 	            				<p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
 
 	            				<div class="widget-call">
@@ -639,7 +646,7 @@
 	        	<div class="container">
 	        		<p class="footer-copyright">Copyright © 2019 TechBazar Store. All Rights Reserved.</p><!-- End .footer-copyright -->
 	        		<figure class="footer-payments">
-	        			<img src="assets/images/payments.png" alt="Payment methods" width="272" height="20">
+	        			<img src="/user/assets/images/payments.png" alt="Payment methods" width="272" height="20">
 	        		</figure><!-- End .footer-payments -->
 	        	</div><!-- End .container -->
 	        </div><!-- End .footer-bottom -->
@@ -830,6 +837,7 @@
         </div><!-- End .modal-dialog -->
     </div><!-- End .modal -->
 
+    
     <script>
     function validate(productId) {
         productId = productId
@@ -870,6 +878,13 @@
     }
 </script> 
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+    crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
 
 
 <%- include('../layout/user/user_footer.ejs') %>

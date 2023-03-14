@@ -32,12 +32,12 @@ const coupen_controller = require("../controllers/coupen_controller");
 
 
 //===============================Loading Home Page=============================
-user_route.get('/user',userController.loadRegister);
+user_route.get('/',userController.loadRegister);
 
 
 
 //=================================Verify User===================================
-user_route.get('/user',userController.verifyUser);
+user_route.get('/',userController.verifyUser);
 
 
 
