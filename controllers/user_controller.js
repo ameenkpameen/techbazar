@@ -94,6 +94,7 @@ const loadRegister = async (req, res) => {
     });
     
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -174,8 +175,8 @@ const all_productshow = async (req, res) => {
     });
 
 
-  }catch{
-
+  }catch(error){
+    res.render('errorpage')
   }
   
 };
@@ -257,6 +258,7 @@ const searchProducts = async (req, res) => {
     console.log(search);
     res.send({payload: search});
   }catch(error){
+    res.render('errorpage')
     console.log(error.message);
   }
 }
@@ -332,6 +334,7 @@ const searchingProducts = async (req, res, next) => {
       res.render('allproducts', { category: categorydata, products: products, search: true, userData: userDetails, cartitems: cartArray, wishnameArray: wishnameArray, nameArray: nameArray, page, totalPages })
     }
   } catch (error) {
+    res.render('errorpage')
     next(error);
   }
 }
@@ -379,6 +382,7 @@ const verifyUser = async (req, res) => {
       res.redirect("back");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -394,6 +398,7 @@ const user_profile = async (req, res) => {
       res.redirect('/')
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -416,6 +421,7 @@ const user_wallet = async (req, res) => {
       res.redirect('/')
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -468,6 +474,7 @@ const edit_profile = async (req, res) => {
       res.redirect("/user");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -478,6 +485,7 @@ const add_address = async (req, res) => {
   try {
     res.render("addaddress",{address: ''});
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -516,6 +524,7 @@ const add_an_address = async (req, res) => {
     }
 
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -543,6 +552,7 @@ const delete_address = async (req, res) => {
      }
 
    }catch{
+    res.render('errorpage')
     console.log(error.message);
    }
 
@@ -562,6 +572,7 @@ const edit_address = async (req, res) => {
     }
 
   }catch(error){
+    res.render('errorpage')
    console.log(error.message);
   }
 
@@ -590,6 +601,7 @@ const editing_address = async (req, res) => {
     }
 
   }catch{
+    res.render('errorpage')
    console.log(error.message);
   }
 
@@ -612,6 +624,7 @@ const user_addresses = async (req, res) => {
       res.redirect("/userprofile");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 }
@@ -643,6 +656,7 @@ const adding_addresses = async (req,res)=>{
       // res.redirect("/userprofile");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 }
@@ -662,6 +676,7 @@ const my_orders = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 }
@@ -682,6 +697,7 @@ const view_orderDetails = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 }
@@ -725,6 +741,7 @@ const changeorderstatus = async (req, res) => {
       
     
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -741,6 +758,7 @@ const load_login = async (req, res) => {
     res.render("user_signin", {message: req.session.loginErrorMsg});
     req.session.loginErrorMsg = ''
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -768,6 +786,7 @@ const sendOtp = async (req, res) => {
       res.render("send_otp");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -806,6 +825,7 @@ const verifyotp = async (req, res) => {
         }
       });
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -814,6 +834,7 @@ const signup_User = async (req, res) => {
   try {
     res.render("user_signup");
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -851,6 +872,7 @@ const insertUser = async (req, res) => {
       });
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -902,6 +924,7 @@ const product_details = async (req, res) => {
       res.render("view_product", { productData: productData,category:catData});
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -923,6 +946,7 @@ const category_products = async (req, res) => {
       userData: userDetails,
     });
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -989,6 +1013,7 @@ const user_cart = async (req, res) => {
       
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1019,6 +1044,7 @@ const removefrom_cart = async (req, res) => {
       res.redirect("signup");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1067,6 +1093,7 @@ const view_cart = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1108,6 +1135,7 @@ const checkout = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1347,6 +1375,7 @@ const submit_checkout = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1387,6 +1416,7 @@ const PaymentVerified= async(req,res,next)=>{
    }
    
   } catch (error) {
+    res.render('errorpage')
    next(error);
      } 
 }
@@ -1402,6 +1432,7 @@ const PaymentFailed = async (req,res) =>{
       res.json({paymentFailed:true,reason:orderDetails.description})
     }
   }catch{
+    res.render('errorpage')
     console.log(error)
   }
 }
@@ -1425,6 +1456,7 @@ const order_confirmation = async (req, res) => {
       res.redirect("signup");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1513,6 +1545,7 @@ const incrementQuantity = async (req, res) => {
       res.json({ success: true, producttotal, totalPrice , stockStatus});
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1547,6 +1580,7 @@ const view_wishlist = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1580,6 +1614,7 @@ const addtowishlist = async (req, res) => {
       res.redirect("/login");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
@@ -1602,6 +1637,7 @@ const removefromwishlist = async (req, res) => {
       res.redirect("signup");
     }
   } catch (error) {
+    res.render('errorpage')
     console.log(error.message);
   }
 };
