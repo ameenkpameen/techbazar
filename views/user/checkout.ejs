@@ -226,13 +226,25 @@
                                         <input type="hidden" class="form-control" id="code" name="code">
 
 										<div class="">
-                                            <button type="button" class="btn btn-primary btn-block my-5" data-bs-toggle="modal" data-bs-target="#formModal">Add Addresses </button>
+                                            <button type="button" class="btn btn-danger btn-block my-5" data-bs-toggle="modal" data-bs-target="#formModal">Add Addresses </button>
                                             
                                             <br>
 										</div><!-- End .custom-checkbox -->
                                         
-	                					<label>Order notes (optional)</label>
-	        							<textarea class="form-control" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
+	                					<h5 class="font-weight-normal">Coupens available</h5>
+                                        
+                                        <% if(coupensavailable==''){ %>
+                                            <button class="btn btn-block pt-2" style="background-color: rgb(211, 62, 62); border-radius: 5px;">
+                                                <h6 class="text-white">No coupens available for you</h6>
+                                              </button>
+                                        <%}else coupensavailable.forEach((element)=>{ %>
+                                            
+	        							   <button class="btn btn-block pt-2" style="background-color: rgb(108, 108, 108); border-radius: 5px;">
+                                             <h6>Coupen code:</h6>
+                                             <h6 class="text-white"><%= element.coupencode %></h6>
+                                           </button>
+                                    
+                                        <% }) %>
 		                		</div><!-- End .col-lg-9 -->
 
                                 

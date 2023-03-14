@@ -152,7 +152,7 @@
                             <a href="/viewcart" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                 <div class="icon text-white">
                                     <i class="icon-shopping-cart"></i>
-                                    <span class="cart-count"><%=cartitems.length%></span>
+                                    <span id="cartcount" class="cart-count"><%=cartitems.length%></span>
                                 </div>
                                 <p>Cart</p>
                             </a>
@@ -882,6 +882,8 @@
                             showConfirmButton: false
                         })
                         setTimeout(() => {
+                            document.getElementById("cartcount").innerHTML = response.cartcount
+                            Swal.close();
                             location.reload()
                         }, 1000);
                       }else if(response.login){

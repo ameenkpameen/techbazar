@@ -972,9 +972,12 @@ const user_cart = async (req, res) => {
         { _id: req.session.user._id },
         { $pull: { wishlist: { productId: id } } }
       )
+
+      const cartitems = await User.findOne({_id:req.session.user._id},{_id:0,cart:1})
+      const cartcount = cartitems.cart.length
       
       if(updated){
-        res.json({ success: true });
+        res.json({ success: true,cartcount });
       }else{
         // res.json({ success: false})
         res.redirect("/");
@@ -1125,8 +1128,9 @@ const checkout = async (req, res) => {
           }
         }
       }
+      const coupensavailable = await Coupen.find({ usersUsed: { $ne: req.session.user._id } })
       if(checkout == true){
-        res.render("checkout",{user:user,cartData:cartData, message: ''});
+        res.render("checkout",{user:user,cartData:cartData, message: '',coupensavailable});
       }else{
         res.redirect('/viewcart');
       }
