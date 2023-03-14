@@ -1599,7 +1599,7 @@ const addtowishlist = async (req, res) => {
         { $push: { wishlist: { productId: id } } }
       ).then((response) => {
         console.log(response);
-        res.redirect("/user");
+        res.redirect("/");
       });
 
       // const user =await User.find({name:req.session.user.name})
