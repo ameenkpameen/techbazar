@@ -131,8 +131,8 @@
             <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
                 <div class="container">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/allproducts">Shop</a></li>
                         <li class="breadcrumb-item active" aria-current="page">My Account</li>
                     </ol>
                 </div><!-- End .container -->
@@ -162,16 +162,16 @@
 								    </li>
 								</ul>
 	                		</aside><!-- End .col-lg-3 -->
-                            <aside class="col-md-8 col-lg-9">
-	                		<div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                            <aside class="col-md-12 col-lg-9 col-sm-12">
+	                		   <div class="tab-pane fade show active" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
 
-                                <% if(orders == ''){ %>
-                                <h4 class="text-danger">No order has been made yet.</h4>
-                                <% }else{ %>
-                                <h4 class="text-success">Your Orders are here...</h4>
-                                <% }%>
-                                <table class="table">
-                                    <tbody>
+                                     <% if(orders == ''){ %>
+                                       <h4 class="text-danger">No order has been made yet.</h4>
+                                     <% }else{ %>
+                                       <h4 class="text-success">Your Orders are here...</h4>
+                                     <% }%>
+                                     <table class="table">
+                                      <tbody>
                                         <% orders.forEach((elements,index)=>{ %>
                                        <tr>
 

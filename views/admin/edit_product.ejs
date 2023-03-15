@@ -60,7 +60,7 @@
 
                   <div class="row mb-3">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Images</label>
-                    <div class="col-lg-6" style="display: flex; justify-content: center;">
+                    <div class="col-lg-6" style="display: flex;">
                       
                       <%
                           
@@ -68,7 +68,7 @@
                         for(let i=0; i<products.image.length; i++){
                             %>
                              <div style="border: 1px solid black; margin: 10px; border-radius: 10px;" class="p-2">
-                             <img class="mx-2" src="/user_images/<%= products.image[i] %>" alt="<%= products.image[i] %>" width="100px" height="100px">
+                             <img class="mx-2" src="/user_images/<%= products.image[i] %>" alt="<%= products.image[i] %>" width="80px" height="80px">
                              <span id="boot-icon" onclick="validate('<%= products._id %>','<%= products.image[i] %>')" class="bi bi-trash" style="font-size: 25px; color: rgb(255, 0, 0); opacity: 1; -webkit-text-stroke-width: 0.3px;"></span>
                             </div>
                             <% }}  %>

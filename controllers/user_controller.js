@@ -1109,7 +1109,6 @@ const checkout = async (req, res) => {
   try {
     if (req.session.user) {
       const user = await User.find({ _id: req.session.user._id });
-
       const cartData = await User.findOne({ _id: req.session.user._id })
        .populate("cart.productId");
 
@@ -1134,10 +1133,11 @@ const checkout = async (req, res) => {
       }else{
         res.redirect('/viewcart');
       }
-      
-    } else {
+
+    }else {
       res.redirect("/login");
     }
+    
   } catch (error) {
     res.render('errorpage')
     console.log(error.message);
@@ -1152,10 +1152,7 @@ const checkout = async (req, res) => {
 const submit_checkout = async (req, res) => {
   try {
     if (req.session.user) {
-      
-      console.log(req.body);
       const payment = req.body.payment
-      console.log(payment);
       if(payment == "COD"){
 
           if(req.body.address == ''){
