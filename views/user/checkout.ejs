@@ -189,18 +189,18 @@
                                             
                                                 <div class="col-sm-6">
                                                     <label>Product Name *</label>
-                                                    <input type="text" class="form-control" value="<%= element.productId.productname %>" required>
+                                                    <input type="text" readonly class="form-control" value="<%= element.productId.productname %>" required>
                                                     
 
                                                 </div><!-- End .col-sm-6 -->
     
                                                 <div class="col-sm-3">
                                                     <label>Quantity</label>
-                                                    <input type="Number" class="form-control" value="<%= element.quantity %>" required>
+                                                    <input type="Number" readonly class="form-control" value="<%= element.quantity %>" required>
                                                 </div><!-- End .col-sm-6 -->
                                                 <div class="col-sm-3">
                                                     <label>Price</label>
-                                                    <input type="Number" class="form-control" value="<%= element.producttotal %>" required>
+                                                    <input type="Number" readonly class="form-control" value="<%= element.producttotal %>" required>
                                                 </div>
                                             </div>
 
@@ -212,9 +212,9 @@
                                         <input type="hidden" class="form-control" value="<%= element.producttotal %>" name="productTotal">
                                         
                                         <% }) %>
-                                        <input type="hidden" class="form-control" value='<%= user[0].carttotal %>' name="cartTotal">
+                                        <input type="hidden" class="form-control" readonly value='<%= user[0].carttotal %>' name="cartTotal">
                                         <label>Total Price</label>
-	            						<input type="text" class="form-control" value="₹<%= user[0].carttotal %>">
+	            						<input type="text" class="form-control" readonly value="₹<%= user[0].carttotal %>">
 
 	        							<div class="custom-control custom-checkbox">
 											<input type="checkbox" class="custom-control-input" id="checkout-create-acc">
@@ -239,10 +239,10 @@
                                               </button>
                                         <%}else coupensavailable.forEach((element)=>{ %>
                                             
-	        							   <button class="btn btn-block pt-2" style="background-color: rgb(108, 108, 108); border-radius: 5px;">
+	        							   <div class="btn btn-block pt-2" style="background-color: rgb(108, 108, 108); border-radius: 5px;">
                                              <h6>Coupen code:</h6>
                                              <h6 class="text-white"><%= element.coupencode %></h6>
-                                           </button>
+                                           </div>
                                     
                                         <% }) %>
 		                		</div><!-- End .col-lg-9 -->

@@ -37,7 +37,6 @@
                                 <a href="#">Links</a>
                                 <ul>
                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                                    <li><a href="wishlist.html"><i class="icon-heart-o"></i>Wishlist <span>(3)</span></a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="contact.html">Contact Us</a></li>
                                     <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
@@ -132,8 +131,8 @@
                 <div class="container">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="/allproducts">Shop</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                        <li class="breadcrumb-item"><a href="/userprofile">My Account</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order History</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -184,7 +183,7 @@
                                          </td>
                                          <td>
                                             <% elements.products.forEach((product)=>{ %>
-                                                <img style="width: 110px;" src="/user_images/<%= product.productId.image[0] %> ">
+                                                <img style="width: 50px;" src="/user_images/<%= product.productId.image[0] %> ">
                                                 <br>
                                                 <% }) %>
 
@@ -256,7 +255,7 @@
             </div><!-- End .page-content -->
         </main><!-- End .main -->
 
-        <footer class="footer" style="background-image: url('user/assets/images/asas.jpg');">
+        <footer class="footer" style="background-image: url('/user/assets/images/asas.jpg');">
         	<div class="footer-middle">
 	            <div class="container">
 	            	<div class="row">

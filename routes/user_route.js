@@ -150,6 +150,8 @@ user_route.get('/viewwishlist',userController.view_wishlist)
 user_route.get('/addtowishlist/:id',userController.addtowishlist)
 user_route.get('/removefromwishlist/:id',userController.removefromwishlist)
 
+user_route.get('/aboutus',userController.aboutus)
+
 module.exports = user_route;
 
 

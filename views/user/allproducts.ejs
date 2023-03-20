@@ -186,8 +186,7 @@
                                     <span class="cart-total-price">$160.00</span>
                                 </div> -->
                                 <div class="dropdown-cart-action">
-                                    <a href="/viewcart" class="btn btn-primary">View Cart</a>
-                                    <a href="/checkout" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+                                    <a href="/viewcart" class="btn btn-primary btn-block">View Cart</a>
                                 </div><!-- End .dropdown-cart-total -->
                             </div><!-- End .dropdown-menu -->
                                       
@@ -681,7 +680,7 @@
                                       if(category.length >0){
                                        for(let j=0; j<category.length; j++){
                                           %>  
-                                        <li class="item-lead"><a href="/viewcategoryproducts?name=<%= category[j].categoryname %>"><%= category[j].categoryname %></a></li>
+                                        <li class="item-lead"><a href="/viewcategoryproducts/<%=category[j]._id %>"><%= category[j].categoryname %></a></li>
                                         <%
 
                                        } }%>

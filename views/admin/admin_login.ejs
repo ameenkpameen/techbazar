@@ -1,15 +1,7 @@
 <%- include('../layout/admin/admin_header.ejs') %>
 
 
-<%
 
-    if(typeof message !== "undefined"){
-        %>
-        <h3><%= message %></h3>
-        <%
-    }
-
-%>
 
 <!-- <form action="" method="post">
     <input type="email" name="username" placeholder="enter username">
@@ -44,7 +36,9 @@
                   </div>
 
                   <form action="" method="post" class="row g-3 needs-validation" novalidate>
-
+                    <% if(typeof message !== "undefined"){ %>
+                          <h5 class="text-center fw-bold" style="color: rgb(224, 86, 86);"><%= message %></h5>
+                          <% } %>
                     <div class="col-12">
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">

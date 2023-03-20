@@ -624,7 +624,11 @@
                 let quantity = parseInt(document.getElementById(productId).innerHTML)
                 count = parseInt(count)
                 if(quantity <= 1 && count == -1){
-
+                    Swal.fire({
+                    icon:'error',
+                    title:'Oops...',
+                    text:'Minimum count is 1.'
+                   })
                 }else{
                     $.ajax({
                         url: '/incrementquantity',

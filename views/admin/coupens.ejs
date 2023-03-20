@@ -61,7 +61,7 @@
                                     <td><%= element.coupencode %></td>
                                     <td><%= element.percentoff %></td>
                                     <td><%= element.maxDiscount %></td>
-                                    <td><%= element.expiryDate %></td>
+                                    <td><%= element.expiryDate.toISOString().slice(0,10) %></td>
                                     
                                     <td><%= element.status %></td>
                                     <td><%= element.minPurchaseAmount %></td>

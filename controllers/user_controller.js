@@ -101,6 +101,22 @@ const loadRegister = async (req, res) => {
 
 
 
+const aboutus = async (req, res) => {
+
+  try{
+    
+     res.render('about_us')
+    
+  }catch(error){
+    res.render('errorpage')
+   console.log(error.message);
+  }
+
+}
+
+
+
+
 async function getProducts(page) {
   const skip = (page - 1) * PAGE_SIZE;
   const products = await Product.find({}).skip(skip).limit(PAGE_SIZE).exec();
@@ -725,13 +741,29 @@ const changeorderstatus = async (req, res) => {
             res.json({ returned: true, status  });
           }
       }else{
-        const order = await Order.findOne({orderId:req.body.orderId}).populate("products.productId")
-        order.products.forEach(async (element)=>{
-          const count = element.quantity + element.productId.stock
-          console.log(count);
-          const update = await Product.updateOne({_id:element.productId._id},{stock:count})
-        })
-          const change = await Order.updateOne({orderId: req.body.orderId},{$set:{status: status}});
+          const order = await Order.findOne({orderId:req.body.orderId}).populate("products.productId")
+            
+            if((order.paymentmethod == 'UPI' && order.status !== "Payment Failed") || order.paymentmethod == 'Wallet' ){
+                  const price = order.totalprice
+                  const wallet = await User.updateOne({_id:order.userId},{$inc:{wallet:price}})
+                  order.products.forEach(async (element)=>{
+                    const count = element.quantity + element.productId.stock
+                    console.log(count);
+                    const update = await Product.updateOne({_id:element.productId._id},{stock:count})
+                  })
+                  var change = await Order.updateOne({orderId: req.body.orderId},{$set:{status: status}});
+            }else if(order.paymentmethod == 'UPI' && order.status == "Payment Failed"){
+                  var change = await Order.updateOne({orderId: req.body.orderId},{$set:{status: status}});
+            }else{
+              order.products.forEach(async (element)=>{
+                const count = element.quantity + element.productId.stock
+                console.log(count);
+                const update = await Product.updateOne({_id:element.productId._id},{stock:count})
+              })
+              var change = await Order.updateOne({orderId: req.body.orderId},{$set:{status: status}});
+            }
+               
+               
         
         if(change){
             res.json({ success: true, status  });
@@ -1148,7 +1180,6 @@ const checkout = async (req, res) => {
 
 
 
-
 const submit_checkout = async (req, res) => {
   try {
     if (req.session.user) {
@@ -1384,8 +1415,6 @@ const submit_checkout = async (req, res) => {
 
 
 
-
-
 const PaymentVerified= async(req,res,next)=>{
   try {
    if(req.session.user){
@@ -1428,7 +1457,14 @@ const PaymentVerified= async(req,res,next)=>{
 const PaymentFailed = async (req,res) =>{
   try{
     const orderDetails = req.body;
+    console.log(orderDetails);
     const data = await Order.updateOne({_id: orderDetails.order.receipt},{status: "Payment Failed"});
+    const orders = await Order.findOne({_id: orderDetails.order.receipt})
+    orders.products.forEach(async(elements)=>{ 
+      const recent = (await Product.findOne({_id:elements.productId},{_id:0,stock:1})).stock
+      newqty = recent+elements.quantity
+      const update = await Product.updateOne({_id:elements.productId},{$set:{stock: newqty}});
+     }) 
     if(data){
       res.json({paymentFailed:true,reason:orderDetails.description})
     }
@@ -1437,8 +1473,6 @@ const PaymentFailed = async (req,res) =>{
     console.log(error)
   }
 }
-
-
 
 
 
@@ -1464,9 +1498,6 @@ const order_confirmation = async (req, res) => {
 
 
 
-
-
-
 const incrementshippingprice = async (req, res)=>{
   try{
     if(req.session.user){
@@ -1489,7 +1520,6 @@ const incrementshippingprice = async (req, res)=>{
     console.log(error.message);
   }
 }
-
 
 
 
@@ -1551,6 +1581,8 @@ const incrementQuantity = async (req, res) => {
   }
 };
 
+
+
 const view_wishlist = async (req, res) => {
   try {
     if (req.session.user) {
@@ -1586,6 +1618,8 @@ const view_wishlist = async (req, res) => {
   }
 };
 
+
+
 const addtowishlist = async (req, res) => {
   try {
     if (req.session.user) {
@@ -1620,6 +1654,8 @@ const addtowishlist = async (req, res) => {
   }
 };
 
+
+
 const removefromwishlist = async (req, res) => {
   try {
     if (req.session.user) {
@@ -1642,6 +1678,8 @@ const removefromwishlist = async (req, res) => {
     console.log(error.message);
   }
 };
+
+
 
 module.exports = {
   loadRegister,
@@ -1680,6 +1718,7 @@ module.exports = {
   PaymentVerified,
   PaymentFailed,
   user_wallet,
-  searchingProducts
+  searchingProducts,
+  aboutus
   // incrementshippingprice
 };

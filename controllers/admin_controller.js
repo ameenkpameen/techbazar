@@ -43,11 +43,11 @@ const verifyAdmin = async(req,res)=>{
                 req.session.admin_id=adminData._id
                 res.redirect('/admin/home');
             }else{
-                res.render('admin_login');
+                res.render('admin_login',{message:"Entered password is incorrect"});
             }
 
        }else{
-        res.render('admin_login',{message:"Email or password incorrect"})
+        res.render('admin_login',{message:"Email is incorrect"})
        }
 
     }catch(error){
@@ -465,16 +465,10 @@ const view_staff = async(req,res)=>{
 const block_user = async(req,res)=>{
 
     try{
-
         const id= req.query.id
         console.log(id);
-
         const hai = await User.find({_id:req.query.id})
-        console.log(hai)
-        
         await User.updateOne({_id:id},{$set:{status:false}});
-        // console.log(productData);
-
         res.redirect('/admin/viewusers')
     }catch(error){
     console.log(error.message);
@@ -523,15 +517,10 @@ const unlist_product = async(req,res)=>{
 
 
 const unblock_user = async(req,res)=>{
-
     try{
-
         const id= req.query.id
         console.log(id);
-        
         await User.updateOne({_id:id},{$set:{status:true}});
-        // console.log(productData);
-
         res.redirect('/admin/viewusers')
     }catch(error){
     console.log(error.message);

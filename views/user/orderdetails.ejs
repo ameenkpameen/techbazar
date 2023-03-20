@@ -37,7 +37,6 @@
                                 <a href="#">Links</a>
                                 <ul>
                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
-                                    <li><a href="wishlist.html"><i class="icon-heart-o"></i>Wishlist <span>(3)</span></a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="contact.html">Contact Us</a></li>
                                     <li><a href="#signin-modal" data-toggle="modal"><i class="icon-user"></i>Login</a></li>
@@ -122,8 +121,8 @@
                 <div class="container">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">My Account</li>
+                        <li class="breadcrumb-item"><a href="/userprofile">My Account</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Details</li>
                     </ol>
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
@@ -273,7 +272,7 @@
                                                  <h6 class="text-danger text-center">Ordered Date</h6>
                                              </div>
                                              <div class="col-lg-10">
-                                                 <h6><%= orders[0].createdAt %></h6>
+                                                 <h6><%= orders[0].createdAt.toISOString().slice(0,10) %></h6>
                                              </div>
                                            </div>
                                         </td>
@@ -295,7 +294,7 @@
             </div><!-- End .page-content -->
         </main><!-- End .main -->
 
-        <footer class="footer" style="background-color: rgb(0, 0, 0);">
+        <footer class="footer" style="background-image: url('/user/assets/images/asas.jpg');">
         	<div class="footer-middle">
 	            <div class="container">
 	            	<div class="row">
