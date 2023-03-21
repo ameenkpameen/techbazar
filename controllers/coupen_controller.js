@@ -4,6 +4,13 @@ const Coupen = require("../models/coupen_data")
 const view_coupens = async (req, res) => {
     try {
         const coupens = await Coupen.find({})
+        const today = new Date(Date.now())
+        console.log(today);
+        coupens.forEach(async(element)=>{
+           if(element.expiryDate< today){
+              await Coupen.updateOne({_id:element._id},{status:"Expired"})
+           }
+        })
         res.render('coupens', { coupens: coupens });
     } catch (error) {
         console.log(error.message);

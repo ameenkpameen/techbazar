@@ -53,7 +53,6 @@
                       </thead>
                       <tbody>
                         <tr>
-                          <%= console.log(coupens); %>
                                 <% coupens.forEach(element => { %>
                                   
                                 
@@ -63,7 +62,13 @@
                                     <td><%= element.maxDiscount %></td>
                                     <td><%= element.expiryDate.toISOString().slice(0,10) %></td>
                                     
-                                    <td><%= element.status %></td>
+                                    <td>
+                                      <% if(element.status == "Expired"){ %>
+                                         <p class="text-danger"><%= element.status %></p>
+                                      <% }else{ %>
+                                        <p class="text-success"><%= element.status %></p>
+                                      <% } %>
+                                    </td>
                                     <td><%= element.minPurchaseAmount %></td>
                                     <td>   
 

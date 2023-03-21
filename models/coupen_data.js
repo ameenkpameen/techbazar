@@ -25,7 +25,7 @@ const coupenData = new mongoose.Schema({
     status:{
         type:String,
         enum:['Active', 'inActive'],
-        default:'inActive'
+        default:'Active'
     },
     minPurchaseAmount:{
         type:Number,
